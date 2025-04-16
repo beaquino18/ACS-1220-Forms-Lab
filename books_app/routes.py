@@ -18,8 +18,10 @@ main = Blueprint("main", __name__)
 def homepage():
     all_books = Book.query.all()
     all_users = User.query.all()
-    return render_template('home.html', 
-        all_books=all_books, all_users=all_users)
+    all_authors = Author.query.all()
+    all_genres = Genre.query.all()
+    return render_template('home.html',
+        all_books=all_books, all_users=all_users, all_authors=all_authors, all_genres=all_genres)
 
 @main.route('/create_book', methods=['GET', 'POST'])
 def create_book():

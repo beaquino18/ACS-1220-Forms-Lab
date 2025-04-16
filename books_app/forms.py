@@ -34,7 +34,7 @@ class AuthorForm(FlaskForm):
         validators=[ Length(min=3, max=200, message="Biography needs to be between 3 and 200 chars")])
     
     date_of_birth = DateField("Date of Birth", validators=[DataRequired()])
-    books = QuerySelectMultipleField('Books', query_factory=lambda: Book.query)
+    books = QuerySelectMultipleField('Authored Books', query_factory=lambda: Book.query)
     submit = SubmitField('Submit')
 
     # Fill out the fields in this class for:
