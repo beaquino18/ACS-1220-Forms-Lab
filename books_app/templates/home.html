@@ -8,19 +8,33 @@
     <a href="/create_book">+ New Book</a>
 </p>
 
+<ul>
+    {% for book in all_books %}
+        <li><a href="/book/{{ book.id }}">{{ book.title }}</a> by {{ book.author.name }}</li>
+    {% endfor %}
+</ul>
+
 <p>
     <a href="/create_author">+ New Author</a>
 </p>
+
+<ul>
+{% for author in all_authors %}
+<li>{{ author.name }}</li>
+{% endfor %}
+</ul>
 
 <p>
     <a href="/create_genre">+ New Genre</a>
 </p>
 
 <ul>
-{% for book in all_books %}
-    <li><a href="/book/{{ book.id }}">{{ book.title }}</a> by {{ book.author.name }}</li>
-{% endfor %}
+    {% for genre in all_genres %}
+    <li>{{ genre.name }}</li>
+    {% endfor %}
 </ul>
+
+
 
 <h2>Users</h2>
 
