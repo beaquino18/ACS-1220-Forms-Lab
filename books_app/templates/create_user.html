@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p>User creation form.</p>
+
+<form method="POST" action="{{ url_for('main.create_user') }}">
+  {{ form.csrf_token }}
+  <fieldset>
+    <legend> Create a User </legend>
+    {{ form.username.label }}
+    {{ form.username }}
+
+    <ul>
+      {% for error in form.username.errors %}
+          <li class="error">{{ error }}</li>
+      {% endfor %}
+    </ul>
+
+    {{ form.favorite_books.label }}
+    {{ form.favorite_books }}
+
+    {{ form.submit }}
+
+  </fieldset>
+</form>
+
+{% endblock %}
