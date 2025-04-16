@@ -40,7 +40,7 @@ class Book(db.Model):
         'User', secondary='user_book', back_populates='favorite_books')
 
     def __str__(self):
-        return f'<Book: {self.title}>'
+        return f'{self.title}'
 
     def __repr__(self):
         return f'<Book: {self.title}>'
@@ -54,7 +54,7 @@ class Author(db.Model):
     books = db.relationship('Book', back_populates='author')
 
     def __str__(self):
-        return f'<Author: {self.name}>'
+        return f'{self.name}'
 
     def __repr__(self):
         return f'<Author: {self.name}>'
@@ -67,7 +67,7 @@ class Genre(db.Model):
         'Book', secondary='book_genre', back_populates='genres')
 
     def __str__(self):
-        return f'<Genre: {self.name}>'
+        return f'{self.name}'
 
     def __repr__(self):
         return f'<Genre: {self.name}>'
