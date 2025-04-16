@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, SelectField, SubmitField
-from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
+from wtforms import StringField, DateField, SelectField, SubmitField, TextAreaField
+from wtforms_sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 from wtforms.validators import DataRequired, Length, ValidationError
 from books_app.models import Audience, Book, Author, Genre
 
@@ -24,8 +24,20 @@ class BookForm(FlaskForm):
 
 class AuthorForm(FlaskForm):
     """Form to create an author."""
+    name = StringField('Author',
+        validators=[
+            DataRequired(),
+            Length(min=3, max=80, message="Author's name needs to be between 3 and 80 chars")
+        ])
+    
+    biography = TextAreaField('Biography', 
+        validators=[ Length(min=3, max=200, message="Biography needs to be between 3 and 200 chars")])
+    
+    date_of_birth = DateField("Date of Birth", validators=[DataRequired()])
+    books = QuerySelectMultipleField('Books', query_factory=lambda: Book.query)
+    submit = SubmitField('Submit')
 
-    # TODO: Fill out the fields in this class for:
+    # Fill out the fields in this class for:
     # - the author's name
     # - the author's biography (hint: use a TextAreaField)
     # - a submit button
@@ -33,13 +45,29 @@ class AuthorForm(FlaskForm):
     # STRETCH CHALLENGE: Add more fields here as well as in `models.py` to
     # collect more information about the author, such as their birth date,
     # country, etc.
-    pass
 
 
 class GenreForm(FlaskForm):
     """Form to create a genre."""
+    name = StringField('Genre',
+        validators=[
+            DataRequired(),
+            Length(min=3, max=200, message="Genre name needs to be between 3 and 80 chars")
+        ])
+    books = QuerySelectMultipleField('Books', query_factory=lambda: Book.query)
+    submit = SubmitField('Submit')
 
-    # TODO: Fill out the fields in this class for:
+    # Fill out the fields in this class for:
     # - the genre's name (e.g. fiction, non-fiction, etc)
     # - a submit button
-    pass
+
+class UserForm(FlaskForm):
+    """Form to create a user."""
+    username = StringField('Username',
+        validators=[
+            DataRequired(),
+            Length(min=3, max=200, message="Username must be between 3 and 80 chars")
+        ])
+    
+    favorite_books = QuerySelectMultipleField('Favorite Books', query_factory=lambda: Book.query)
+    submit = SubmitField('Submit')
