@@ -1,0 +1,8 @@
+Since the database model is updated - added date_of_birth to Author model, I had to recreate it.
+
+Method: Using SQLite Directly
+1. Create backup database
+cp books_app/database.db books_app/database_backup.db
+
+2. Create new python script called `update.py` and add these
+3. Run script
